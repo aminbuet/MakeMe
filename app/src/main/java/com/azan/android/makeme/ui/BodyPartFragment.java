@@ -3,6 +3,7 @@ package com.azan.android.makeme.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,19 @@ import android.widget.ImageView;
 import com.azan.android.makeme.R;
 import com.azan.android.makeme.data.AndroidImageAssets;
 
+import java.util.List;
+
 /**
  * Created by Aminur Rahman on 4/11/17.
  */
 
 public class BodyPartFragment extends Fragment {
+
+    // Tag for Logging
+    private  static final String TAG = "BodyFragment";
+
+    private List<Integer> mImageIds;
+    private int mListIndex;
 
     //Mandatory constructor
     public  BodyPartFragment(){
@@ -40,9 +49,23 @@ public class BodyPartFragment extends Fragment {
         ImageView imageView = rootView.findViewById(R.id.body_part_image_view);
 
         //Set the image resource to (ImageView) display
-        imageView.setImageResource(AndroidImageAssets.getHeads().get(0));
+        if (mImageIds != null){
+            imageView.setImageResource(mImageIds.get(mListIndex));
+        } else {
+            Log.v(TAG, "This fragment has no list of image id");
+        }
 
         //Return root view
         return  rootView;
+    }
+
+    //Setter for image ids and index
+
+    public void setImageIds(List<Integer> imageIds) {
+        mImageIds = imageIds;
+    }
+
+    public void setListIndex(int index) {
+        mListIndex = index;
     }
 }
