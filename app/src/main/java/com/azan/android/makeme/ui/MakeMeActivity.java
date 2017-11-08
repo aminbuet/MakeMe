@@ -21,7 +21,11 @@ public class MakeMeActivity extends AppCompatActivity {
 
             //Set the list of Image ids
             headFragment.setImageIds(AndroidImageAssets.getHeads());
-            headFragment.setListIndex(1);
+
+            //Get the correct index access in the array of head images from intent
+            //default value = 0
+            int headIndex = getIntent().getIntExtra("headIndex", 0);
+            headFragment.setListIndex(headIndex);
 
             //Use a FragmentManager
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -34,6 +38,8 @@ public class MakeMeActivity extends AppCompatActivity {
             //Body display
             BodyPartFragment bodyFragment = new BodyPartFragment();
             bodyFragment.setImageIds(AndroidImageAssets.getBodies());
+            int bodyIndex = getIntent().getIntExtra("bodyIndex", 0);
+            bodyFragment.setListIndex(bodyIndex);
             fragmentManager.beginTransaction()
                     .add(R.id.body_container, bodyFragment)
                     .commit();
@@ -41,6 +47,8 @@ public class MakeMeActivity extends AppCompatActivity {
             //leg display
             BodyPartFragment legFragment = new BodyPartFragment();
             legFragment.setImageIds(AndroidImageAssets.getLegs());
+            int legIndex = getIntent().getIntExtra("legIndex", 0);
+            legFragment.setListIndex(legIndex);
             fragmentManager.beginTransaction()
                     .add(R.id.leg_container, legFragment)
                     .commit();
